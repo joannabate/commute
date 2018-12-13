@@ -45,6 +45,24 @@ def plot_bayarea(dist_method='absolute', link_method='complete', k=20, alpha=2, 
     # Clusters and plots given kwargs
     cluster_and_plot(df_bayarea, df_tracts, dist_method=dist_method, link_method=link_method, k=k, alpha=alpha, cmap=cmap, cnum=cnum)
 
+def plot_state(state, dist_method='absolute', link_method='complete', k=20, alpha=2, cmap=cm.Dark2, cnum=8):
+    """ Runs hierarchical clustering and plotting for bay area case """
+    # Loads commute data
+    df_merged, df_tracts = get_commute_dfs()
+    # Limits view to bay area
+    df_state = limit_area(df_merged,state = state)
+    # Clusters and plots given kwargs
+    cluster_and_plot(df_state, df_tracts, dist_method=dist_method, link_method=link_method, k=k, alpha=alpha, cmap=cmap, cnum=cnum)
+
+def plot_area(state, dist_method='absolute', link_method='complete', k=20, alpha=2, cmap=cm.Dark2, cnum=8):
+    """ Runs hierarchical clustering and plotting for bay area case """
+    # Loads commute data
+    df_merged, df_tracts = get_commute_dfs()
+    # Limits view to bay area
+    df_state = limit_area(df_merged,state = state)
+    # Clusters and plots given kwargs
+    cluster_and_plot(df_state, df_tracts, dist_method=dist_method, link_method=link_method, k=k, alpha=alpha, cmap=cmap, cnum=cnum)
+
 def plot_nyc(dist_method='absolute', link_method='complete', k=20, alpha=2, cmap=cm.Dark2, cnum=8):
     """ Runs hierarchical clustering and plotting for new york city case """
     # Loads commute data
@@ -72,6 +90,8 @@ def cluster_and_plot(df_view, df_tracts, dist_method='absolute', link_method='co
 
     # Scatterplots colored results
     plot_hc(df_results_colored, color_array)
+
+    return df_results_colored
 
 def commute_hc(df_distance_matrix, df_tracts, Z, k=3, criterion='maxclust'):
     """ Gets results for plotting based on given linkage matrix and target k """
@@ -118,7 +138,6 @@ def plot_hc(df_results, color_array, figsize=(20,20)):
     """
     plt.figure(figsize=figsize)
     plt.scatter(df_results['INTPTLONG'],df_results['INTPTLAT'], c=color_array)
-    plt.show()
 
 def gmaps_plot(df_results, color_array):
     # Read api_key from txt file
