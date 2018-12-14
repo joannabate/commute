@@ -131,6 +131,18 @@ def get_rgba(df_results):
 
     return color_array
 
+def get_rgb(df_results):
+    """ 
+    Input: Results df including r, g, b values
+    Output: Array of colors (rgb) for scatterplotting 
+    """
+    color_array = []
+    for i, row in df_results.iterrows():
+        r, g, b= row['r'], row['g'], row['b']
+        color_array.append((int(r*255), int(g*255), int(b*255)))
+
+    return color_array
+
 def plot_hc(df_results, color_array, figsize=(20,20)):
     """
     Input: Results of hierarchical clustering to be plotted, and respective rgba color mapping and figsize
