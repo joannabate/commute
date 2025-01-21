@@ -138,4 +138,3 @@ dependencies:
       - scikit-learn==0.20.4
       - scipy==1.2.3
       - urllib3==1.26.20
-prefix: /Users/jonathanbate/miniconda3/envs/py27
